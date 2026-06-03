@@ -1,14 +1,14 @@
 // Auto-generated — do not edit manually
-// Chain ID: 42220 | Deployed: 2026-05-18T04:37:53.000Z
+// Chain ID: 42220 | Deployed: 2026-06-03T13:21:26.000Z
 
-export const CONTRACT_ADDRESS = "0x19A13d6197af07d1Acd12EDF2A5197E4F6fb4F83" as `0x${string}`;
+export const CONTRACT_ADDRESS = "0x61579782c820d63951fB1658151aDb5cC3E13288" as `0x${string}`;
 
 
 // Proxy pattern — FE selalu pakai CONTRACT_ADDRESS (proxy)
 // Implementation hanya perlu saat upgrade
-export const PROXY_ADDRESS          = "0x19A13d6197af07d1Acd12EDF2A5197E4F6fb4F83" as `0x${string}`;
-export const IMPLEMENTATION_ADDRESS = "0xc96A5b3DEAbA03D8B9c4004669432079FDCEBFF9" as `0x${string}`;
+export const PROXY_ADDRESS          = "0x61579782c820d63951fB1658151aDb5cC3E13288" as `0x${string}`;
+export const IMPLEMENTATION_ADDRESS = "0x40c329afDc3F1e66Cd6b9d11BeA282Cc6F8a4527" as `0x${string}`;
 
 
 export const CHAIN_ID     = 42220;
-export const DEPLOYED_AT  = 1779079073;
+export const DEPLOYED_AT  = 1780492886;
