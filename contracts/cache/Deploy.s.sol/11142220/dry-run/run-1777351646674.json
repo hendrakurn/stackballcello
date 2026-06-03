@@ -1,0 +1,10 @@
+{
+  "transactions": [
+    {
+      "rpc": "https://forno.celo-sepolia.celo-testnet.org"
+    },
+    {
+      "rpc": "https://forno.celo-sepolia.celo-testnet.org"
+    }
+  ]
+}
