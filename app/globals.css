@@ -8,8 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +22,1738 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+.stackball-title,
+.stackball-connectPanel h1,
+.stackball-pageHeader h1,
+.stackball-chainOverlay strong,
+.stackball-totalScore,
+.stackball-engineOverlay p {
+  font-family: var(--font-title), var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+.stackball-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top, rgba(255, 219, 188, 0.65), transparent 34%),
+    linear-gradient(180deg, #fff7ef 0%, #ffd2a9 45%, #ff9950 100%);
+}
+
+.stackball-panel {
+  width: min(100%, 980px);
+  display: grid;
+  gap: 18px;
+}
+
+.stackball-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stackball-label {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: rgba(63, 29, 10, 0.62);
+}
+
+.stackball-title {
+  margin: 4px 0 0;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 0.96;
+  color: #2d1306;
+}
+
+.stackball-reset,
+.stackball-overlayButton {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1.25rem;
+  font: inherit;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #1f1310, #502d0f);
+  box-shadow: 0 14px 30px rgba(54, 22, 6, 0.2);
+}
+
+.stackball-stage {
+  position: relative;
+  overflow: hidden;
+  height: min(74vh, 760px);
+  border-radius: 36px;
+  background:
+    linear-gradient(180deg, rgba(255, 247, 240, 0.98), rgba(255, 215, 189, 0.9)),
+    linear-gradient(180deg, #ffffff, #ffe5d1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 30px 80px rgba(95, 43, 12, 0.22);
+  touch-action: none;
+  user-select: none;
+}
+
+.stackball-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0) 0 32%, rgba(113, 36, 0, 0.045) 32.5% 33.5%, rgba(255, 255, 255, 0) 34%);
+  pointer-events: none;
+}
+
+.stackball-hud {
+  position: absolute;
+  inset: 20px 20px auto;
+  z-index: 4;
+  display: flex;
+  gap: 10px;
+}
+
+.stackball-stat {
+  min-width: 92px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  color: #341505;
+}
+
+.stackball-stat strong {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.stackball-statLabel {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(52, 21, 5, 0.64);
+}
+
+.stackball-meter {
+  position: absolute;
+  top: 98px;
+  left: 20px;
+  right: 20px;
+  height: 12px;
+  z-index: 4;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(57, 24, 10, 0.12);
+}
+
+.stackball-meterFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff8e3c, #ff5232);
+  transition: width 120ms linear;
+}
+
+.stackball-meterFill.is-invincible {
+  background: linear-gradient(90deg, #ff1d38, #ff6f61);
+}
+
+.stackball-statusPill {
+  position: absolute;
+  top: 118px;
+  left: 20px;
+  z-index: 4;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #55200b;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.stackball-shaft {
+  position: absolute;
+  top: 104px;
+  bottom: 42px;
+  left: 50%;
+  width: 18px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f9f9f9, #f0c7ad 50%, #f4f4f4);
+  box-shadow:
+    inset 0 0 0 1px rgba(101, 51, 23, 0.08),
+    0 0 60px rgba(255, 255, 255, 0.55);
+}
+
+.stackball-platform {
+  position: absolute;
+  left: 50%;
+  margin-left: calc(var(--platform-offset, 0px));
+  transform-origin: center center;
+  opacity: 1;
+  transition:
+    opacity 220ms ease,
+    transform 180ms linear;
+}
+
+.stackball-platform.is-destroyed {
+  opacity: 0;
+}
+
+.stackball-platformRing {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  box-shadow:
+    0 22px 30px rgba(90, 33, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  -webkit-mask: radial-gradient(circle, transparent 0 41%, black 41.5%);
+  mask: radial-gradient(circle, transparent 0 41%, black 41.5%);
+}
+
+.stackball-ball {
+  position: absolute;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, #ffffff, #ffcc4d 42%, #ff763c 100%);
+  box-shadow:
+    0 18px 28px rgba(93, 26, 0, 0.24),
+    0 0 0 10px rgba(255, 161, 70, 0.1);
+  z-index: 3;
+  transition:
+    transform 120ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease;
+}
+
+.stackball-ball.is-pressed {
+  transform: translate(-50%, -50%) scale(0.94);
+}
+
+.stackball-ball.is-invincible {
+  background: radial-gradient(circle at 30% 30%, #fff1f2, #ff5f5f 46%, #d50028 100%);
+  box-shadow:
+    0 18px 28px rgba(118, 0, 32, 0.28),
+    0 0 0 18px rgba(255, 36, 72, 0.14);
+}
+
+.stackball-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(255, 248, 242, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.stackball-overlayKicker {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(76, 31, 10, 0.64);
+}
+
+.stackball-overlayTitle {
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1;
+  color: #2b1206;
+}
+
+.stackball-overlayButton {
+  justify-self: center;
+  margin-top: 8px;
+}
+
+.stackball-footer {
+  display: grid;
+  gap: 6px;
+  color: #51210a;
+}
+
+.stackball-footer p {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .stackball-shell {
+    padding: 14px;
+  }
+
+  .stackball-stage {
+    height: 72vh;
+    border-radius: 28px;
+  }
+
+  .stackball-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .stackball-hud {
+    right: 20px;
+    flex-wrap: wrap;
+  }
+
+  .stackball-stat {
+    min-width: 84px;
+  }
+}
+
+.stackball-engine {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.48), transparent 13%),
+    radial-gradient(circle at 71% 10%, rgba(255, 255, 255, 0.42), transparent 15%),
+    linear-gradient(180deg, #72cdf8 0%, #8ed8ff 48%, #c9efff 100%);
+  touch-action: none;
+  user-select: none;
+}
+
+.stackball-gameBackdrop {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.48), transparent 13%),
+    radial-gradient(circle at 71% 10%, rgba(255, 255, 255, 0.42), transparent 15%),
+    linear-gradient(180deg, #72cdf8 0%, #8ed8ff 48%, #c9efff 100%);
+}
+
+.stackball-gameBackdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 14% 25%, rgba(255, 255, 255, 0.7) 0 8%, transparent 18%),
+    radial-gradient(ellipse at 34% 20%, rgba(255, 255, 255, 0.5) 0 5%, transparent 13%),
+    radial-gradient(ellipse at 73% 28%, rgba(255, 255, 255, 0.55) 0 7%, transparent 16%);
+  opacity: 0.72;
+}
+
+.stackball-engine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 14% 25%, rgba(255, 255, 255, 0.7) 0 8%, transparent 18%),
+    radial-gradient(ellipse at 34% 20%, rgba(255, 255, 255, 0.5) 0 5%, transparent 13%),
+    radial-gradient(ellipse at 73% 28%, rgba(255, 255, 255, 0.55) 0 7%, transparent 16%);
+  opacity: 0.72;
+}
+
+.stackball-engineCanvas {
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;
+}
+
+.stackball-engineHud {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: min(340px, calc(100vw - 40px));
+  color: #0f3f5d;
+}
+
+.stackball-engineHud div {
+  display: inline-flex;
+  min-width: 88px;
+  min-height: 50px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 32px rgba(31, 122, 176, 0.16);
+}
+
+.stackball-engineHud span {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: rgba(15, 63, 93, 0.68);
+}
+
+.stackball-engineHud strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.2rem;
+}
+
+.stackball-engineMeter {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 2;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.stackball-engineMeter div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #22d3ee, #84cc16);
+  transition: width 120ms linear;
+}
+
+.stackball-engineMeter div.is-invincible {
+  background: linear-gradient(90deg, #f97316, #ef4444);
+}
+
+.stackball-engineOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-content: center;
+  gap: 14px;
+  background: rgba(125, 205, 246, 0.08);
+  color: #0f3f5d;
+  text-align: center;
+  pointer-events: none;
+}
+
+.stackball-engineOverlay p {
+  margin: 0;
+  font-size: clamp(2rem, 8vw, 4.8rem);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.stackball-engineOverlay button {
+  justify-self: center;
+  pointer-events: auto;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+  padding: 0.85rem 1.2rem;
+  background: #ffffff;
+  color: #0f3f5d;
+  font: inherit;
+  font-weight: 800;
+  box-shadow: 0 14px 30px rgba(31, 122, 176, 0.18);
+}
+
+.stackball-onchainStage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #7dcdf6;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.stackball-startGate {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.stackball-startGate:disabled {
+  cursor: not-allowed;
+}
+
+.stackball-startOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.stackball-startButton {
+  min-width: 190px;
+  pointer-events: auto;
+  box-shadow: 0 20px 50px rgba(14, 116, 144, 0.28);
+}
+
+.stackball-startNotice {
+  position: absolute;
+  right: 20px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 6;
+  display: grid;
+  gap: 8px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 8px;
+  background: rgba(8, 18, 38, 0.72);
+  color: #ffffff;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(7, 23, 39, 0.18);
+}
+
+.stackball-startNotice strong {
+  font-size: 0.92rem;
+}
+
+.stackball-startNotice p,
+.stackball-startNotice small {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.76rem;
+}
+
+.stackball-startNotice dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 10px;
+  margin: 0;
+  font-size: 0.76rem;
+}
+
+.stackball-startNotice dt {
+  color: rgba(255, 255, 255, 0.56);
+  font-weight: 700;
+}
+
+.stackball-startNotice dd {
+  margin: 0;
+  min-width: 0;
+  color: #fde68a;
+  overflow-wrap: anywhere;
+}
+
+.stackball-gameInfoDock {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 5;
+  display: grid;
+  gap: 10px;
+  width: min(370px, calc(100vw - 36px));
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.stackball-gameNav {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px;
+  max-width: calc(100vw - 40px);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.56);
+  color: #0f3f5d;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 32px rgba(31, 122, 176, 0.16);
+}
+
+.stackball-gameNavMobile {
+  display: none;
+}
+
+.stackball-gameNavWallet,
+.stackball-gameNavButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  min-width: 0;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 11px;
+  background: rgba(255, 255, 255, 0.45);
+  color: #0f3f5d;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.stackball-gameNavWallet {
+  min-width: 112px;
+  background: rgba(15, 63, 93, 0.08);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stackball-hamburgerButton,
+.stackball-gameDrawerClose {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.56);
+  color: #0f3f5d;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 32px rgba(31, 122, 176, 0.16);
+}
+
+.stackball-hamburgerButton {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+}
+
+.stackball-hamburgerButton span {
+  position: absolute;
+  width: 22px;
+  height: 3px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.stackball-hamburgerButton span:nth-child(1) {
+  transform: translateY(-8px);
+}
+
+.stackball-hamburgerButton span:nth-child(3) {
+  transform: translateY(8px);
+}
+
+.stackball-drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  background: rgba(6, 22, 36, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.stackball-drawerBackdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.stackball-gameDrawer {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 18px;
+  width: min(75vw, 320px);
+  padding: 18px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+  border-left: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 8px 0 0 8px;
+  background: rgba(255, 255, 255, 0.3);
+  color: #0f3f5d;
+  backdrop-filter: blur(22px);
+  box-shadow: -20px 0 48px rgba(31, 122, 176, 0.22);
+  transform: translateX(100%);
+  transition: transform 220ms ease;
+  pointer-events: none;
+}
+
+.stackball-gameDrawer.is-open {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.stackball-gameDrawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stackball-gameDrawerHeader strong {
+  font-size: 1.15rem;
+}
+
+.stackball-gameDrawerClose {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+}
+
+.stackball-gameDrawerClose span {
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.stackball-gameDrawerClose span:first-child {
+  transform: rotate(45deg);
+}
+
+.stackball-gameDrawerClose span:last-child {
+  transform: rotate(-45deg);
+}
+
+.stackball-gameDrawerBody {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.stackball-gameDrawerWallet,
+.stackball-gameDrawerButton {
+  width: 100%;
+  min-height: 52px;
+  justify-content: center;
+  font-size: 0.92rem;
+}
+
+.stackball-gameDrawerWallet {
+  background: rgba(15, 63, 93, 0.1);
+}
+
+.stackball-infoPanel {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(8, 18, 38, 0.72);
+  color: white;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+.stackball-infoTitle {
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stackball-statGrid,
+.stackball-prizeCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.stackball-prizeCards {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.stackball-statGrid div,
+.stackball-prizeCards div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 9px 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.stackball-statGrid span,
+.stackball-prizeCards span,
+.stackball-timerPanel span,
+.stackball-poolBalance {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.72rem;
+}
+
+.stackball-statGrid strong,
+.stackball-prizeCards strong,
+.stackball-poolBalance strong {
+  color: #fde047;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.stackball-poolBalance {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.stackball-timerPanel {
+  display: grid;
+  gap: 3px;
+}
+
+.stackball-timerPanel strong {
+  color: #67e8f9;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 1.15rem;
+}
+
+.stackball-rewardPanel {
+  display: grid;
+  gap: 10px;
+}
+
+.stackball-rewardStatus {
+  display: grid;
+  gap: 4px;
+}
+
+.stackball-rewardStatus strong {
+  color: #fde047;
+  font-size: 1rem;
+}
+
+.stackball-rewardStatus span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.8rem;
+}
+
+.stackball-rewardMeta,
+.stackball-rewardWinners {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stackball-rewardMeta div,
+.stackball-rewardWinners div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 9px 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.stackball-rewardMeta span,
+.stackball-rewardWinners span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.72rem;
+}
+
+.stackball-rewardMeta strong,
+.stackball-rewardWinners strong {
+  color: #fde047;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.stackball-rewardNotice {
+  border: 1px solid rgba(103, 232, 249, 0.34);
+  border-radius: 8px;
+  padding: 9px 10px;
+  background: rgba(8, 47, 73, 0.34);
+  color: #cffafe;
+  font-size: 0.78rem;
+}
+
+.stackball-rewardNotice.is-success {
+  border-color: rgba(74, 222, 128, 0.34);
+  background: rgba(21, 128, 61, 0.2);
+  color: #dcfce7;
+}
+
+.stackball-rewardNotice.is-error {
+  border-color: rgba(248, 113, 113, 0.4);
+  background: rgba(127, 29, 29, 0.28);
+  color: #fecaca;
+}
+
+.stackball-periodBanner {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  z-index: 6;
+  transform: translateX(-50%);
+  max-width: min(420px, calc(100vw - 36px));
+  border: 1px solid rgba(250, 204, 21, 0.5);
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: rgba(113, 63, 18, 0.76);
+  color: #fef3c7;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.stackball-configNotice {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 7;
+  max-width: min(340px, calc(100vw - 40px));
+  border: 1px solid rgba(250, 204, 21, 0.5);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: rgba(8, 18, 38, 0.76);
+  color: #fde68a;
+  font-size: 0.86rem;
+}
+
+.stackball-chainOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background: rgba(6, 22, 36, 0.78);
+  color: white;
+  text-align: center;
+}
+
+.stackball-chainOverlay strong {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.stackball-chainOverlay span,
+.stackball-chainOverlay small {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.stackball-chainOverlay p {
+  max-width: min(520px, 92vw);
+  margin: 4px 0 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  border-radius: 8px;
+  background: rgba(127, 29, 29, 0.4);
+  color: #fecaca;
+  font-size: 0.86rem;
+}
+
+.stackball-submitHint {
+  max-width: min(520px, 92vw);
+  border: 1px solid rgba(103, 232, 249, 0.48);
+  border-radius: 8px;
+  padding: 9px 12px;
+  background: rgba(8, 47, 73, 0.44);
+  color: #cffafe;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.stackball-roundOverlay {
+  background: rgba(6, 22, 36, 0.84);
+}
+
+.stackball-totalScore {
+  color: #facc15;
+  font-size: clamp(3rem, 14vw, 5.5rem);
+  line-height: 0.95;
+}
+
+.stackball-actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: min(100%, 480px);
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.stackball-primary,
+.stackball-secondary {
+  min-width: 148px;
+  border-radius: 8px;
+  padding: 13px 18px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 800;
+}
+
+.stackball-primary {
+  color: #1b1600;
+  background: linear-gradient(135deg, #fde047, #f59e0b);
+}
+
+.stackball-secondary {
+  color: #67e8f9;
+  background: rgba(8, 47, 73, 0.58);
+  border-color: rgba(103, 232, 249, 0.62);
+}
+
+.stackball-primary small,
+.stackball-secondary small {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: currentColor;
+  opacity: 0.72;
+}
+
+.stackball-connectShell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  padding: clamp(20px, 5vw, 56px);
+  background: #10233f;
+  color: white;
+}
+
+.stackball-connectLayout {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  align-items: center;
+  gap: clamp(24px, 4vw, 54px);
+}
+
+.stackball-connectShell::before {
+  content: "";
+  position: absolute;
+  inset: -7%;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.52), transparent 13%),
+    radial-gradient(circle at 71% 10%, rgba(255, 255, 255, 0.44), transparent 15%),
+    radial-gradient(ellipse at 14% 25%, rgba(255, 255, 255, 0.72) 0 8%, transparent 18%),
+    radial-gradient(ellipse at 34% 20%, rgba(255, 255, 255, 0.5) 0 5%, transparent 13%),
+    radial-gradient(ellipse at 73% 28%, rgba(255, 255, 255, 0.56) 0 7%, transparent 16%),
+    linear-gradient(180deg, #72cdf8 0%, #8ed8ff 48%, #c9efff 100%);
+  filter: blur(18px);
+  opacity: 0.7;
+  transform: scale(1.08);
+}
+
+.stackball-connectShell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(5, 16, 32, 0.78), rgba(5, 16, 32, 0.32) 52%, rgba(5, 16, 32, 0.48)),
+    radial-gradient(circle at 50% 70%, rgba(250, 204, 21, 0.16), transparent 32%);
+}
+
+.stackball-connectPanel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  max-width: 620px;
+  min-width: 0;
+}
+
+.stackball-connectSide {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: end;
+}
+
+.stackball-connectSideStack {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  justify-items: end;
+}
+
+.stackball-connectSide .stackball-leaderboard {
+  max-width: 420px;
+}
+
+.stackball-kicker {
+  margin: 0;
+  color: #67e8f9;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.stackball-connectPanel h1 {
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  line-height: 0.9;
+}
+
+.stackball-pageShell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: clamp(18px, 4vw, 44px);
+  color: white;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.48), transparent 13%),
+    radial-gradient(circle at 71% 10%, rgba(255, 255, 255, 0.42), transparent 15%),
+    linear-gradient(180deg, #72cdf8 0%, #8ed8ff 48%, #c9efff 100%);
+}
+
+.stackball-pageShell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 14% 25%, rgba(255, 255, 255, 0.7) 0 8%, transparent 18%),
+    radial-gradient(ellipse at 34% 20%, rgba(255, 255, 255, 0.5) 0 5%, transparent 13%),
+    radial-gradient(ellipse at 73% 28%, rgba(255, 255, 255, 0.55) 0 7%, transparent 16%),
+    linear-gradient(180deg, rgba(6, 22, 36, 0.1), rgba(6, 22, 36, 0.32));
+}
+
+.stackball-pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.stackball-pageHeader > div {
+  min-width: 0;
+}
+
+.stackball-pageHeader h1 {
+  margin: 0;
+  color: white;
+  font-size: clamp(2.6rem, 8vw, 5.4rem);
+  line-height: 0.92;
+  text-shadow: 0 12px 34px rgba(6, 22, 36, 0.28);
+}
+
+.stackball-pageBack {
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.56);
+  color: #0f3f5d;
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 32px rgba(31, 122, 176, 0.16);
+  white-space: nowrap;
+}
+
+.stackball-pageGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 14px;
+  align-items: start;
+}
+
+.stackball-pageMain .stackball-leaderboard {
+  max-width: none;
+}
+
+.stackball-pageSide {
+  display: grid;
+  gap: 14px;
+}
+
+.stackball-profilePanel {
+  display: grid;
+  gap: 14px;
+  width: min(100%, 680px);
+  min-width: 0;
+}
+
+.stackball-profileIdentity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(8, 18, 38, 0.72);
+  color: white;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.stackball-profileIdentity span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.72rem;
+}
+
+.stackball-profileIdentity strong {
+  color: #fde047;
+  font-size: 1.1rem;
+}
+
+.stackball-connectCopy {
+  max-width: 38rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.stackball-prizeStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.stackball-prizeStrip span {
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fde047;
+  font-weight: 800;
+  flex: 0 1 auto;
+}
+
+.stackball-connectButton {
+  border: 0;
+  border-radius: 8px;
+  padding: 15px 24px;
+  width: min(100%, 320px);
+  background: #2563eb;
+  color: white;
+  font: inherit;
+  font-size: 1.08rem;
+  font-weight: 800;
+  box-shadow: 0 18px 44px rgba(37, 99, 235, 0.34);
+}
+
+.stackball-connectButton:disabled {
+  opacity: 0.68;
+}
+
+.stackball-leaderboard {
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 18px;
+  background: rgba(8, 18, 38, 0.72);
+  color: white;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(14px);
+}
+
+.stackball-leaderboardHeader {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.stackball-leaderboardTitle {
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.stackball-leaderboardMeta {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 0.86rem;
+}
+
+.stackball-leaderboardRank {
+  color: #fde047;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.stackball-leaderboardColumns {
+  display: grid;
+  grid-template-columns: 46px minmax(96px, 1fr) 70px 78px;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 8px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.stackball-prizes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.stackball-prizes div {
+  display: grid;
+  gap: 2px;
+  border-radius: 8px;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.stackball-prizes strong {
+  color: #fde047;
+  font-size: 0.82rem;
+}
+
+.stackball-prizes span {
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 0.72rem;
+}
+
+.stackball-leaderboardRows {
+  display: grid;
+  gap: 6px;
+}
+
+.stackball-leaderboardRow {
+  display: grid;
+  grid-template-columns: 38px minmax(96px, 1fr) 70px 78px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.stackball-leaderboardRow.is-current {
+  outline: 1px solid rgba(250, 204, 21, 0.62);
+  background: rgba(250, 204, 21, 0.14);
+}
+
+.stackball-rowRank {
+  width: 38px;
+  color: #fde047;
+  font-weight: 900;
+}
+
+.stackball-rowAddress {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stackball-rowAddress em {
+  margin-left: 6px;
+  color: #fde047;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.stackball-rowPrize {
+  color: #fef3c7;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.stackball-skeletonRow {
+  min-height: 38px;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent),
+    rgba(255, 255, 255, 0.04);
+  background-size: 180% 100%;
+  animation: stackball-shimmer 1.3s infinite;
+}
+
+@keyframes stackball-shimmer {
+  from {
+    background-position: 180% 0;
+  }
+
+  to {
+    background-position: -180% 0;
+  }
+}
+
+.stackball-empty {
+  padding: 18px;
+  color: rgba(255, 255, 255, 0.58);
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .stackball-connectLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: 24px;
+  }
+
+  .stackball-pageGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  }
+}
+
+@media (max-width: 900px) {
+  .stackball-connectShell {
+    align-content: start;
+  }
+
+  .stackball-connectLayout,
+  .stackball-pageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .stackball-connectSide,
+  .stackball-connectSideStack,
+  .stackball-pageSide {
+    justify-items: stretch;
+  }
+
+  .stackball-connectSide .stackball-leaderboard,
+  .stackball-pageMain .stackball-leaderboard {
+    max-width: none;
+  }
+
+  .stackball-profilePanel {
+    width: 100%;
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stackball-pageShell,
+  .stackball-connectShell {
+    padding: 16px;
+  }
+
+  .stackball-connectLayout {
+    gap: 20px;
+  }
+
+  .stackball-connectPanel h1 {
+    font-size: clamp(2.7rem, 15vw, 4.6rem);
+  }
+
+  .stackball-connectCopy {
+    max-width: 32rem;
+    font-size: 1rem;
+  }
+
+  .stackball-pageHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stackball-pageHeader h1 {
+    font-size: clamp(2.5rem, 14vw, 4.4rem);
+  }
+
+  .stackball-pageBack {
+    width: 100%;
+    text-align: center;
+  }
+
+  .stackball-gameNavDesktop {
+    display: none;
+  }
+
+  .stackball-gameNavMobile {
+    position: absolute;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 12px;
+    z-index: 7;
+    display: flex;
+  }
+
+  .stackball-engineHud {
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    left: 50%;
+    right: auto;
+    justify-content: center;
+    width: min(calc(100vw - 84px), 252px);
+    max-width: none;
+    transform: translateX(-50%);
+  }
+
+  .stackball-engineHud div {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 40px;
+    padding: 7px 8px;
+  }
+
+  .stackball-periodBanner {
+    top: calc(68px + env(safe-area-inset-top, 0px));
+  }
+
+  .stackball-chainOverlay {
+    padding: 20px 16px max(24px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .stackball-startNotice {
+    right: 12px;
+    left: 12px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    width: auto;
+  }
+
+  .stackball-chainOverlay strong {
+    font-size: clamp(1.6rem, 9vw, 2.8rem);
+  }
+
+  .stackball-totalScore {
+    font-size: clamp(2.5rem, 18vw, 4.4rem);
+  }
+
+  .stackball-actionRow {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .stackball-primary,
+  .stackball-secondary {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .stackball-statGrid,
+  .stackball-prizeCards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stackball-prizeCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .stackball-profileIdentity {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .stackball-leaderboard {
+    padding: 16px;
+  }
+
+  .stackball-leaderboardColumns,
+  .stackball-leaderboardRow {
+    grid-template-columns: 36px minmax(0, 1fr) 64px;
+  }
+
+  .stackball-leaderboardColumns span:last-child,
+  .stackball-rowPrize {
+    display: none;
+  }
+
+  .stackball-rowRank {
+    width: 36px;
+  }
+
+  .stackball-engineMeter {
+    right: 12px;
+    left: 12px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 640px) {
+  .stackball-connectPanel {
+    justify-items: stretch;
+  }
+
+  .stackball-connectPanel h1,
+  .stackball-connectCopy,
+  .stackball-connectPanel small,
+  .stackball-kicker {
+    text-align: center;
+  }
+
+  .stackball-prizeStrip,
+  .stackball-actionRow {
+    width: 100%;
+  }
+
+  .stackball-prizeStrip {
+    gap: 8px;
+  }
+
+  .stackball-prizeStrip span {
+    flex: 1 1 calc(50% - 4px);
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .stackball-gameInfoDock {
+    top: auto;
+    right: 12px;
+    bottom: 46px;
+    left: 12px;
+    width: auto;
+    max-height: 44vh;
+  }
+
+  .stackball-periodBanner {
+    top: 76px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .stackball-rewardMeta,
+  .stackball-rewardWinners {
+    grid-template-columns: 1fr;
+  }
+
+  .stackball-leaderboardColumns,
+  .stackball-leaderboardRow {
+    gap: 6px;
+  }
+
+  .stackball-engineHud {
+    width: min(calc(100vw - 86px), 244px);
+    gap: 8px;
+  }
+
+  .stackball-engineHud div {
+    min-height: 38px;
+    padding: 7px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stackball-connectShell,
+  .stackball-pageShell {
+    padding: 14px;
+  }
+
+  .stackball-connectPanel {
+    gap: 14px;
+  }
+
+  .stackball-connectPanel h1 {
+    font-size: clamp(2.4rem, 17vw, 3.9rem);
+  }
+
+  .stackball-pageHeader h1 {
+    font-size: clamp(2.25rem, 16vw, 3.7rem);
+    line-height: 0.95;
+  }
+
+  .stackball-kicker {
+    font-size: 0.72rem;
+  }
+
+  .stackball-connectButton,
+  .stackball-pageBack {
+    min-height: 48px;
+  }
+
+  .stackball-gameNavMobile {
+    right: 10px;
+  }
+
+  .stackball-hamburgerButton {
+    width: 48px;
+    height: 48px;
+  }
+
+  .stackball-engineHud {
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    width: min(calc(100vw - 80px), 232px);
+    gap: 6px;
+  }
+
+  .stackball-engineHud div {
+    min-height: 36px;
+    padding: 6px 7px;
+  }
+
+  .stackball-engineHud span {
+    font-size: 0.68rem;
+  }
+
+  .stackball-engineHud strong {
+    margin-top: 2px;
+    font-size: 1rem;
+  }
+
+  .stackball-periodBanner {
+    top: calc(62px + env(safe-area-inset-top, 0px));
+    font-size: 0.8rem;
+    padding: 9px 11px;
+  }
+
+  .stackball-chainOverlay {
+    gap: 10px;
+    padding: 18px 14px max(24px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .stackball-chainOverlay span,
+  .stackball-chainOverlay small,
+  .stackball-chainOverlay p,
+  .stackball-submitHint {
+    font-size: 0.8rem;
+  }
+
+  .stackball-actionRow {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .stackball-primary,
+  .stackball-secondary {
+    padding: 12px 14px;
+  }
+
+  .stackball-gameDrawer {
+    width: 75vw;
+    padding: 16px 14px calc(18px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .stackball-leaderboard {
+    padding: 14px;
+  }
+
+  .stackball-leaderboardHeader {
+    margin-bottom: 12px;
+  }
+
+  .stackball-leaderboardColumns {
+    padding: 0 4px;
+    font-size: 0.62rem;
+  }
+
+  .stackball-leaderboardRow {
+    padding: 10px;
+  }
+
+  .stackball-rowAddress em {
+    display: none;
+  }
+
+  .stackball-statGrid,
+  .stackball-prizeCards,
+  .stackball-rewardMeta,
+  .stackball-rewardWinners {
+    grid-template-columns: 1fr;
+  }
 }
