@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@react-three/fiber':
-        specifier: ^9.6.0
-        version: 9.6.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.184.0)
+        specifier: ^9.6.1
+        version: 9.6.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.184.0)
       '@tanstack/react-query':
         specifier: ^5.100.5
         version: 5.100.5(react@19.2.4)
@@ -475,8 +475,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==, tarball: https://registry.npmjs.org/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz}
     engines: {node: '>=12.4.0'}
 
-  '@react-three/fiber@9.6.0':
-    resolution: {integrity: sha512-90abYK2q5/qDM+GACs9zRvc5KhEEpEWqWlHSd64zTPNxg+9wCJvTfyD9x2so7hlQhjRYO1Fa6flR3BC/kpTFkA==, tarball: https://registry.npmjs.org/@react-three/fiber/-/fiber-9.6.0.tgz}
+  '@react-three/fiber@9.6.1':
+    resolution: {integrity: sha512-zF0rsKcVYpcJwbFEnv2HkHX9cvOEgsfQo/X8lwmR2dn13S4qEQJXir9fxf5js2LQFoXqxOY7MDkOkYx2uZ4gSg==, tarball: https://registry.npmjs.org/@react-three/fiber/-/fiber-9.6.1.tgz}
     peerDependencies:
       expo: '>=43.0'
       expo-asset: '>=8.4'
@@ -2620,7 +2620,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@react-three/fiber@9.6.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.184.0)':
+  '@react-three/fiber@9.6.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.184.0)':
     dependencies:
       '@babel/runtime': 7.29.2
       '@types/webxr': 0.5.24
