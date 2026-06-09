@@ -7,7 +7,7 @@ import { formatAddress } from "@/lib/minipay";
 const PRIZE_BADGES = ["1st 10 CELO", "2nd 7 CELO", "3rd 5 CELO"] as const;
 
 export function Leaderboard() {
-  const { top10, isLoading, refetch } = useLeaderboard();
+  const { leaderboard, isLoading, refetch } = useLeaderboard();
 
   useContractEvents({
     onScoreSubmitted: () => void refetch(),
@@ -20,7 +20,7 @@ export function Leaderboard() {
     <section className="stackball-leaderboard" aria-label="Leaderboard">
       <div className="stackball-leaderboardHeader">
         <div className="stackball-leaderboardTitle">Leaderboard</div>
-        <div className="stackball-leaderboardMeta">Top 10 this period</div>
+        <div className="stackball-leaderboardMeta">Top {leaderboard.length} this period</div>
       </div>
 
       <div className="stackball-leaderboardColumns" aria-hidden="true">
@@ -39,11 +39,11 @@ export function Leaderboard() {
             />
           ))}
         </div>
-      ) : top10.length === 0 ? (
+      ) : leaderboard.length === 0 ? (
         <div className="stackball-empty">No scores this period yet</div>
       ) : (
         <div className="stackball-leaderboardRows">
-          {top10.map((entry) => (
+          {leaderboard.map((entry) => (
             <div
               className={
                 entry.isCurrentUser
