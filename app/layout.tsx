@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "Onchain arcade game on Celo. Break stacks, win CELO.",
   other: {
     "talentapp:project_verification":
-      "27f667985e369dcf014e5b6e831f94469152faeb8278a0b6784404db620fb9950dd608725ec4d43941bf188eeb6dd1274ad5ee8eda4dd3f87ee48e0c47332433",
+      "158d99697828b6debe3ab1f52791bf75b10bedab220ecc0afe2c6e2c46e1d6f9246634716e4ba1f4793fb69fe871359be379cb45d4c67979d5bcf6369349a69a",
   },
 };
 
