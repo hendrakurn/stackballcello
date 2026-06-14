@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const contracts = ["StackBallGame", "Counter"];
+const contracts = ["StackBallGame", "StackBallGameV2", "Counter"];
 
 const outDir       = path.join(__dirname, "../out");
 const deployFile   = path.join(__dirname, "../abi/deployment.json");
@@ -24,7 +24,13 @@ contracts.forEach((name) => {
   console.log(`✅ ABI: ${name}.json + ${name}.ts`);
 });
 
-// ── 2. Sync Address → constants.ts ─────────────────────────────────────────
+// ── 2. Copy V2 ABI for bot (Python reads from lib/abi-contract) ─────────────
+const v2AbiSrc = path.join(abiDir, "StackBallGameV2.json");
+if (fs.existsSync(v2AbiSrc)) {
+  console.log("✅ V2 ABI available for bot at lib/abi-contract/StackBallGameV2.json");
+}
+
+// ── 3. Sync Address → constants.ts ─────────────────────────────────────────
 if (!fs.existsSync(deployFile)) {
   console.warn("⚠️  abi/deployment.json not found, skipping address sync");
   process.exit(0);
