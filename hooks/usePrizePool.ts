@@ -100,7 +100,7 @@ export function usePrizePool() {
     balanceWei,
     timeLeft,
     countdown: formatDuration(timeLeft),
-    isPeriodExpired: Boolean(expiredQuery.data) || timeLeft === 0,
+    isPeriodExpired: Boolean(expiredQuery.data) || (expiredQuery.data !== false && timeLeft === 0),
     isLoading:
       prizesQuery.isLoading ||
       timeQuery.isLoading ||
