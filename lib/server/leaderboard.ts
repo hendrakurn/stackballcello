@@ -23,8 +23,8 @@ export type PeriodInfo = {
 const CELO_BLOCK_TIME_SECS = 5;
 // Safety buffer: scan a bit earlier than periodStart to avoid missing events
 const BLOCK_SCAN_BUFFER = 200n;
-// Max blocks per getLogs call (Forno allows up to ~100k, use safe limit)
-const MAX_BLOCKS_PER_CHUNK = 50_000n;
+// Max blocks per getLogs call (Forno caps at 5000)
+const MAX_BLOCKS_PER_CHUNK = 5_000n;
 
 async function getLogsChunked(fromBlock: bigint, toBlock: bigint) {
   const allLogs = [];
