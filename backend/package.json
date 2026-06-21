@@ -1,10 +1,13 @@
 {
   "name": "stackball-backend",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "finalize": "tsx src/runFinalize.ts"
+    ,"forcereset": "tsx src/runForceReset.ts"
   },
   "dependencies": {
     "hono": "^4.7.11",
