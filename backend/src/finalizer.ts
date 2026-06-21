@@ -21,7 +21,7 @@ const FINALIZE_ABI = parseAbiItem(
 );
 const GET_PRIZES_ABI = parseAbiItem("function getPrizes() view returns (uint256, uint256, uint256)");
 
-async function tryFinalize() {
+export async function tryFinalize() {
   try {
     const [isExpired, periodNumber] = await Promise.all([
       publicClient.readContract({
@@ -88,6 +88,6 @@ async function tryFinalize() {
 
 export function startFinalizer(intervalMs = 60_000) {
   console.log(`[finalizer] Starting — checking every ${intervalMs / 1000}s`);
-  tryFinalize(); // run immediately on start
+  void tryFinalize(); // run immediately on start
   setInterval(tryFinalize, intervalMs);
 }
