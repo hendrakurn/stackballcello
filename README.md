@@ -28,9 +28,14 @@ Built to showcase a low-cost blockchain-native play experience, this project dem
 
 ## Screenshots & Demo
 
-- Homepage: [public/homepage.png](public/homepage.png#L1)
-- Gameplay: [public/gameplay.png](public/gameplay.png#L1)
-- GIF demo: [public/democrashstackball-ezgif.com-video-to-gif-converter.gif](public/democrashstackball-ezgif.com-video-to-gif-converter.gif#L1)
+### Homepage
+![Homepage](public/homepage.png)
+
+### Gameplay
+![Gameplay](public/gameplay.png)
+
+### GIF Demo
+![Demo GIF](public/democrashstackball-ezgif.com-video-to-gif-converter.gif)
 
 ## Advantages & Why Celo
 ### Why CrasgStackBall stands out:
