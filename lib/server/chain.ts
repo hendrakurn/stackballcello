@@ -7,7 +7,10 @@ import { CHAIN_ID } from "@/lib/abi-contract/constants";
 export const CONTRACT_ADDRESS = (
   process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ??
   process.env.CONTRACT_ADDRESS ??
-  "0x61579782c820d63951fB1658151aDb5cC3E13288"
+  // Default to V2 proxy address (match bot config) to ensure events from
+  // the onchain activity bot (`otwtopten/bot/main.py`) are picked up by the
+  // leaderboard event scanner. Can still be overridden via env vars.
+  "0x8c007f65CBdb55E1271F60f0283D988e82Bb041b"
 ) as `0x${string}`;
 
 export const chain =
